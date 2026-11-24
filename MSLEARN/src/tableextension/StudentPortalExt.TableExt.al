@@ -33,6 +33,9 @@ tableextension 50102 StudentPortalExtension extends Student
             begin
                 if "Portal Enabled" then
                     TestField("Portal Username");
+                if "Portal Password Hash" = '' then
+                    Error(NoPasswordErr);
+
             end;
         }
         field(50112; "Portal Password Hash"; Text[100])
@@ -59,4 +62,5 @@ tableextension 50102 StudentPortalExtension extends Student
 
     var
         UsernameTakenErr: Label 'The portal username %1 is already used by another student.';
+        NoPasswordErr: Label 'Set a portal password before enabling portal access.';
 }
