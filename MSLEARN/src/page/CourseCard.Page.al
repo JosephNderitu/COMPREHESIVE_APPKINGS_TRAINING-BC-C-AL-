@@ -3,7 +3,6 @@ page 50114 "Course Card"
     Caption = 'Course Card';
     PageType = Card;
     ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = CourseTable;
 
     layout
@@ -41,6 +40,10 @@ page 50114 "Course Card"
                 field(Blocked; Rec.Blocked)
                 {
                     ToolTip = 'Specifies whether the course is closed to new enrolments.';
+                }
+                field("No. of Students"; Rec."No. of Students")
+                {
+                    ToolTip = 'Specifies how many students are currently enrolled in this course.';
                 }
             }
         }

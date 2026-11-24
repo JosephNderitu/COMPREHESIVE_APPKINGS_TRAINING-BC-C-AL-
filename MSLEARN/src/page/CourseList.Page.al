@@ -5,6 +5,7 @@ page 50113 CourseList
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = CourseTable;
+    CardPageId = "Course Card";
     Editable = false;
 
     layout

@@ -2,6 +2,8 @@ table 50103 StudentCourseTable
 {
     Caption = 'Student Course';
     DataClassification = CustomerContent;
+    LookupPageId = StudentCourseList;
+    DrillDownPageId = StudentCourseList;
 
     fields
     {
@@ -50,11 +52,30 @@ table 50103 StudentCourseTable
 
         }
     }
+    var
+        StudentStatusErr: Label 'Student %1 is %2 and cannot be enrolled in new courses.';
+        CourseBlockedErr: Label 'Course %1 is blocked and is closed to new enrolments.';
 
     trigger OnInsert()
     begin
         if "Enrollment Date" = 0D then begin
             "Enrollment Date" := WorkDate();
+        end;
+    end;
+
+    local procedure CheckEnrolMentRules()
+    var
+        Student: Record Student;
+        Course: Record CourseTable;
+    begin
+        Student.Get("Student No.");
+        if Student.Status in [Student.Status::Suspended, Student.Status::Graduated] then begin
+            Error(StudentStatusErr, "Student No.", Student.Status);
+        end;
+
+        Course.Get("Course Code");
+        if Course.Blocked then begin
+            Error(CourseBlockedErr, "Course Code");
         end;
     end;
 

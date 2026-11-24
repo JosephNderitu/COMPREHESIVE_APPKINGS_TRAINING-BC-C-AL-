@@ -62,6 +62,16 @@ table 50101 Student
             Editable = false;
             TableRelation = "No. Series";
         }
+        field(11; "No. of Courses"; Integer)
+        {
+            Caption = 'No. of Courses';
+            FieldClass = FlowField;
+            CalcFormula = count(StudentCourseTable where("Student No." = field("No."), "Enrollment Status" = const(Enrolled)));
+            Editable = false;
+        }
+        // field(12; "Portal Enabled"; Boolean){
+        //     Caption = '';
+        // }
     }
 
     keys
@@ -84,6 +94,7 @@ table 50101 Student
 
     var
         UniSetup: Record "University Setup";
+        HasEnrolmentsErr: Label 'Student %1 has enrolments and cannot be deleted. Delete the enrolments first.';
 
     trigger OnInsert()
     var
@@ -98,6 +109,15 @@ table 50101 Student
 
         if "Enrollment Date" = 0D then
             "Enrollment Date" := WorkDate();
+    end;
+
+    trigger OnDelete()
+    var
+        StudentCourse: Record StudentCourseTable;
+    begin
+        StudentCourse.SetRange("Student No.", "No.");
+        if not StudentCourse.IsEmpty() then
+            Error(HasEnrolmentsErr, "No.");
     end;
 
     procedure AssistEdit(OldStudent: Record Student): Boolean

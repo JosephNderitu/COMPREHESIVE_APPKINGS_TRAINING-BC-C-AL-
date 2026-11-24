@@ -43,6 +43,10 @@ page 50112 "Student Card"
                 Caption = 'Enrollment';
 
                 field("Enrollment Date"; Rec."Enrollment Date") { ToolTip = 'Specifies when the student enrolled.'; }
+                field("No. of Courses"; Rec."No. of Courses")
+                {
+                    ToolTip = 'Specifies how many courses the student is currently enrolled in.';
+                }
             }
         }
     }
