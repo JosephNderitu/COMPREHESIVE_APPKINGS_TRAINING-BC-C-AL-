@@ -47,5 +47,14 @@ pageextension 50112 StudentCardPageExtension extends "Student Card"
                 }
             }
         }
+        addlast(Content)
+        {
+            part(Courses; "Student Course Subform")
+            {
+                ApplicationArea = All;
+                Caption = 'Enrolled Units';
+                SubPageLink = "Student No." = field("No.");
+            }
+        }
     }
 }
