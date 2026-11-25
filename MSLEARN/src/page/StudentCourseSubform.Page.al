@@ -1,4 +1,4 @@
-page 50135 "Student Course Subform"
+page 50116 "Student Course Subform"
 {
     Caption = 'Enrolled Units';
     PageType = ListPart;
