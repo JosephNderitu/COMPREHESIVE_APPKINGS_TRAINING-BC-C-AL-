@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 mb-3">
+                <i class="fa-solid fa-circle-check text-success me-2"></i>You are signed in
+            </h1>
+            <p class="mb-1">Student number from your login: <strong>@ViewData["StudentNo"]</strong></p>
+            <p class="text-muted mb-0">Must change password: @ViewData["MustChange"]</p>
+        </div>
+    </div>
+</div>
